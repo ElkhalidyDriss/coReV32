@@ -1,0 +1,20 @@
+---------------------------------------------------------------------------------------
+--  Author: Driss Elkhalidy , an embedded systems engineering student                -- 
+--          at National Institute of Posts and Telecommunications , Rabat , Morocco. --
+--  Description : Implementation of program memory.            --
+---------------------------------------------------------------------------------------
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+
+entity rv_ctrl_unit is
+port (
+       clk , rst : in std_logic;
+       aluEQ : std_logic;-- the Equal flag of the two input operands to the ALU
+       
+
+); 
+end entity;
+
