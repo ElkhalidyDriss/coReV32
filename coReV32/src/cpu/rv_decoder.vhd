@@ -15,12 +15,12 @@ use work.rv_package.all;
 entity rv_decoder is 
 port (
       --instruction
-      instr_data   : in std_logic_vector(31 downto 0);
+      instr_data    : in std_logic_vector(31 downto 0);
+      illegal_instr : out std_logic;
       --Register file 
       reg_file_raddr1    : out std_logic_vector(4 downto 0);
       reg_file_raddr2    : out std_logic_vector(4 downto 0);
       reg_file_waddr     : out std_logic_vector(4 downto 0);  
-      reg_file_wdata     : out std_logic_vector(31 downto 0);
       reg_file_wdata_src : out std_logic_vector(2 downto 0);
       reg_file_we        : out std_logic;
       --Branch/JUMP  
@@ -31,8 +31,6 @@ port (
       alu_operand_a_src     : out std_logic_vector(2 downto 0);--alu operand a source 
       alu_operand_b_src     : out std_logic_vector(2 downto 0);
       alu_op                : out std_logic_vector(3 downto 0);--alu operation
-      alu_operand_a_val     : out std_logic_vector(31 downto 0);--alu operand a value
-      alu_operand_b_val     : out std_logic_vector(31 downto 0);--alu operand b value
       --Data Memory
       data_mem_size : out std_logic_vector(2 downto 0); -- word size to be retrieved from memory (byte , short or int)
       data_mem_we        : out std_logic;--data memory write enable
@@ -222,10 +220,10 @@ begin
                              alu_operand_b_src <= ALU_OPERAND_SRC_IMM;
                              alu_op <= ALU_AND;
                              imm_mux_sel <= Z_IMM_BAR;
-                        when others => null;
+                        when others => illegal_instr <= '1';
                   end case;
                   pc_next_src <= PC_INCREMENT;
-            when others => null;
+            when others => illegal_instr <= '1';
       end case;
 end process;
 end architecture;
