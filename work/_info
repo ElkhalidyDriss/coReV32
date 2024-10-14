@@ -1,0 +1,418 @@
+m255
+K4
+z2
+!s11e vcom 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+d/home/idriss/Documents/Projects/coReV32
+Erv_alu
+Z0 w1727608533
+Z1 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 0
+Z4 d/home/idriss/Documents/Project/coReV32
+Z5 8/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_alu.vhd
+Z6 F/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_alu.vhd
+l0
+Z7 L12 1
+VZdSUafRbR]ZPlEz<^Z31G3
+!s100 ]=2=LS1B1YGKl@9DoA87C0
+Z8 OV;C;2020.1;71
+32
+Z9 !s110 1728914307
+!i10b 1
+Z10 !s108 1728914307.000000
+Z11 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_alu.vhd|
+Z12 !s107 /home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_alu.vhd|
+!i113 1
+Z13 o-work work -2002 -explicit
+Z14 tExplicit 1 CvgOpt 0
+Arv_alu_arch
+R1
+R2
+R3
+DEx4 work 6 rv_alu 0 22 ZdSUafRbR]ZPlEz<^Z31G3
+!i122 0
+l21
+L20 45
+VQ[251C2JH=Qo3ISZN?KKS2
+!s100 4Ame4^EoIISJcmU9]`Nd`2
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+R14
+Erv_alu_tb
+Z15 w1727475479
+R1
+R2
+R3
+!i122 6
+R4
+Z16 8/home/idriss/Documents/Project/coReV32/coReV32/src/testbench/rv_alu_tb.vhd
+Z17 F/home/idriss/Documents/Project/coReV32/coReV32/src/testbench/rv_alu_tb.vhd
+l0
+Z18 L13 1
+VMQj8aQ_Z@>ID0O_ck11`52
+!s100 ]JNDR@h8JamQ;VZMGAh9^0
+R8
+32
+R9
+!i10b 1
+R10
+Z19 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/coReV32/src/testbench/rv_alu_tb.vhd|
+Z20 !s107 /home/idriss/Documents/Project/coReV32/coReV32/src/testbench/rv_alu_tb.vhd|
+!i113 1
+R13
+R14
+Arv_alu_tb_arch
+R1
+R2
+R3
+DEx4 work 9 rv_alu_tb 0 22 MQj8aQ_Z@>ID0O_ck11`52
+!i122 6
+l27
+L16 33
+V;P52b6jaAma0;HEm:zS<n2
+!s100 C4ObZ:JIOJRmoi4Q>=T;F0
+R8
+32
+R9
+!i10b 1
+R10
+R19
+R20
+!i113 1
+R13
+R14
+Erv_bus_ctrl
+Z21 w1727792386
+R1
+R2
+R3
+!i122 1
+R4
+Z22 8/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_bus_ctrl.vhd
+Z23 F/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_bus_ctrl.vhd
+l0
+L8 1
+VWd8G8LV22`e@J[0`G7STQ1
+!s100 TgeXJOOiGA_KW2?iT3`Jz2
+R8
+32
+R9
+!i10b 1
+R10
+Z24 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_bus_ctrl.vhd|
+Z25 !s107 /home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_bus_ctrl.vhd|
+!i113 1
+R13
+R14
+Arv_bus_ctrl_arch
+R1
+R2
+R3
+DEx4 work 11 rv_bus_ctrl 0 22 Wd8G8LV22`e@J[0`G7STQ1
+!i122 1
+l23
+L21 20
+V`hBoIo6z9TK>2eR3@3TWX1
+!s100 ZaB3>Y=HCOOQ@WzeK@D?g1
+R8
+32
+R9
+!i10b 1
+R10
+R24
+R25
+!i113 1
+R13
+R14
+Erv_core
+Z26 w1727607519
+R1
+R2
+R3
+!i122 2
+R4
+Z27 8/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_core.vhd
+Z28 F/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_core.vhd
+l0
+R18
+V=f1MUl9QTId1g`2P`9i0X1
+!s100 8TJ@WlG<gQ=`0dBoeoNHF1
+R8
+32
+R9
+!i10b 1
+R10
+Z29 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_core.vhd|
+Z30 !s107 /home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_core.vhd|
+!i113 1
+R13
+R14
+Arv_core_arch
+R1
+R2
+R3
+DEx4 work 7 rv_core 0 22 =f1MUl9QTId1g`2P`9i0X1
+!i122 2
+l20
+L17 7
+VnOYLm[1W?6hFE@bg`Ccma3
+!s100 nNVCf@akb0H<V=D]O0BoE1
+R8
+32
+R9
+!i10b 1
+R10
+R29
+R30
+!i113 1
+R13
+R14
+Erv_extend
+Z31 w1728437368
+R1
+R2
+R3
+!i122 3
+R4
+Z32 8/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_extend.vhd
+Z33 F/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_extend.vhd
+l0
+R18
+V<ziM3?cK6m2jogh^0R_GF0
+!s100 k<Y6[]mQ8QlCg0PlD4Kdh1
+R8
+32
+R9
+!i10b 1
+R10
+Z34 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_extend.vhd|
+Z35 !s107 /home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_extend.vhd|
+!i113 1
+R13
+R14
+Arv_extend_arch
+R1
+R2
+R3
+DEx4 work 9 rv_extend 0 22 <ziM3?cK6m2jogh^0R_GF0
+!i122 3
+l27
+L24 19
+V7ebTFI7Hjg^K>eK>ezimB2
+!s100 ;G?G@XDKl;j_mTUMSH[ZJ1
+R8
+32
+R9
+!i10b 1
+R10
+R34
+R35
+!i113 1
+R13
+R14
+Erv_extend_tb
+Z36 w1727536018
+R1
+R2
+R3
+!i122 7
+R4
+Z37 8/home/idriss/Documents/Project/coReV32/coReV32/src/testbench/rv_extend_tb.vhd
+Z38 F/home/idriss/Documents/Project/coReV32/coReV32/src/testbench/rv_extend_tb.vhd
+l0
+R18
+VhoLJ[fL5Ko[k]Vc>Zi_DW2
+!s100 cKAFDzOJhfLA7;R3Q=X>51
+R8
+32
+R9
+!i10b 1
+R10
+Z39 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/coReV32/src/testbench/rv_extend_tb.vhd|
+Z40 !s107 /home/idriss/Documents/Project/coReV32/coReV32/src/testbench/rv_extend_tb.vhd|
+!i113 1
+R13
+R14
+Arv_extend_tb_arch
+R1
+R2
+R3
+DEx4 work 12 rv_extend_tb 0 22 hoLJ[fL5Ko[k]Vc>Zi_DW2
+!i122 7
+l30
+L16 23
+V=Cg:DVWgoFXag;Ez2]c@K2
+!s100 ?7`[6B93kzR4M[oLA1Fl;2
+R8
+32
+R9
+!i10b 1
+R10
+R39
+R40
+!i113 1
+R13
+R14
+Prv_package
+R2
+R3
+!i122 9
+w1728749305
+R4
+8/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_package.vhd
+F/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_package.vhd
+l0
+L6 1
+Vh3L@Y6OWlWF?SdaEaO<Z71
+!s100 dEEjKihE1<4<1?HBIng^Z1
+R8
+32
+!s110 1728914308
+!i10b 1
+R10
+!s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_package.vhd|
+!s107 /home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_package.vhd|
+!i113 1
+R13
+R14
+Erv_pc
+Z41 w1728081374
+R2
+R3
+!i122 4
+R4
+Z42 8/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_pc.vhd
+Z43 F/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_pc.vhd
+l0
+L4 1
+VJNeHUj61HQ<MM@k>D>JLU0
+!s100 NoGR^llZ38>U7SBd[;JdS1
+R8
+32
+R9
+!i10b 1
+R10
+Z44 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_pc.vhd|
+Z45 !s107 /home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_pc.vhd|
+!i113 1
+R13
+R14
+Arv_pc_arch
+R2
+R3
+DEx4 work 5 rv_pc 0 22 JNeHUj61HQ<MM@k>D>JLU0
+!i122 4
+l12
+L11 13
+VZm8LJLV:3VKfNSe5^Km7P2
+!s100 @93gPfg4Bh9ZI@WEQi`i52
+R8
+32
+R9
+!i10b 1
+R10
+R44
+R45
+!i113 1
+R13
+R14
+Erv_prog_mem_tb
+Z46 w1727789447
+R1
+R2
+R3
+!i122 8
+R4
+Z47 8/home/idriss/Documents/Project/coReV32/coReV32/src/testbench/rv_prog_mem_tb.vhd
+Z48 F/home/idriss/Documents/Project/coReV32/coReV32/src/testbench/rv_prog_mem_tb.vhd
+l0
+L5 1
+Vz_cYIR<J8cm;z6Sfo=Ka`2
+!s100 ifL5R6QP4eZEP:eXVf[kW0
+R8
+32
+R9
+!i10b 1
+R10
+Z49 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/coReV32/src/testbench/rv_prog_mem_tb.vhd|
+Z50 !s107 /home/idriss/Documents/Project/coReV32/coReV32/src/testbench/rv_prog_mem_tb.vhd|
+!i113 1
+R13
+R14
+Arv_prog_mem_tb_arch
+R1
+R2
+R3
+DEx4 work 14 rv_prog_mem_tb 0 22 z_cYIR<J8cm;z6Sfo=Ka`2
+!i122 8
+l26
+L8 59
+Vj8QPI>_=SY?G:llQWcd;92
+!s100 Qf5K@TZoQeoMFS:Klz3:]2
+R8
+32
+R9
+!i10b 1
+R10
+R49
+R50
+!i113 1
+R13
+R14
+Erv_reg_file
+Z51 w1728770106
+R1
+R2
+R3
+!i122 5
+R4
+Z52 8/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_reg_file.vhd
+Z53 F/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_reg_file.vhd
+l0
+R7
+V_mmg=NE<2iX;`4z3Mc<1S1
+!s100 WBS:^LBF6NcbSALSM9Tb00
+R8
+32
+R9
+!i10b 1
+R10
+Z54 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_reg_file.vhd|
+Z55 !s107 /home/idriss/Documents/Project/coReV32/coReV32/src/cpu/rv_reg_file.vhd|
+!i113 1
+R13
+R14
+Arv_reg_file_arch
+R1
+R2
+R3
+DEx4 work 11 rv_reg_file 0 22 _mmg=NE<2iX;`4z3Mc<1S1
+!i122 5
+l31
+L26 17
+VKl]W@lDZz>j`QzbHo5VG^0
+!s100 :c8Qe=_TC[DKPBBN6c<4h2
+R8
+32
+R9
+!i10b 1
+R10
+R54
+R55
+!i113 1
+R13
+R14
