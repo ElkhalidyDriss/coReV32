@@ -36,7 +36,7 @@ constant ALU_EQ   : std_logic_vector(3 downto 0) :="1111";--for equality test
 --ALU Operands sources 
 constant ALU_OPERAND_RS1          : std_logic_vector(2 downto 0) :="000";--ALU operand source is reg file source 1
 constant ALU_OPERAND_RS2          : std_logic_vector(2 downto 0) :="001";--ALU operand source is reg file source 2
-constant ALU_OPERAND_PC           : std_logic_vector(2 downto 0) :="010";--ALU operand src is pc_curr + 4 
+constant ALU_OPERAND_PC           : std_logic_vector(2 downto 0) :="010";--ALU operand src is current program counter
 constant ALU_OPERAND_SRC_CSR      : std_logic_vector(2 downto 0) :="011";--alu operand A source is value of CSR
 constant ALU_OPERAND_SRC_IMM      : std_logic_vector(2 downto 0) :="100";--alu operand  source is immediate value
 constant ALU_OPERAND_RS1_BAR      : std_logic_vector(2 downto 0) :="101";--alu operand is the negative value of RS1
@@ -49,11 +49,8 @@ constant W_SRC_CSR        : std_logic_vector(2 downto 0) :="001";--write data so
 constant W_SRC_PC_PLUS_4     : std_logic_vector(2 downto 0) :="010";--write data  is  pc_curr+4
 constant W_SRC_DATA_MEM   : std_logic_vector(2 downto 0) :="011";--write data source comes from data memory output 
 constant W_SRC_IMM        : std_logic_vector(2 downto 0) :="100";--write data source comes from extended imm_u value
---CSR unit 
---! if there is only read and write operantion change the bits length 
-constant CSR_OP_READ  : std_logic_vector(1 downto 0):="00";
-constant CSR_OP_WRITE : std_logic_vector(1 downto 0):="01";
-
+--Control&Status Registers
+constant MEPC_ADDR : std_logic_vector(11 downto 0) :=x"341";
 --------------------------------------------------------
 --                      OPCODE                        --
 --------------------------------------------------------
@@ -96,13 +93,16 @@ constant OP_IMM : std_logic_vector(6 downto 0) :="0010011";--Register to Immedia
         constant OR_OP   : std_logic_vector(3 downto 0) :="0110";
         constant AND_OP  : std_logic_vector(3 downto 0) :="0111";
 --CSR instructions
-constant CSR : std_logic_vector(6 downto 0) :="1110011";--Opcode for CSR instructions
+constant SYSTEM : std_logic_vector(6 downto 0) :="1110011";--Opcode for CSR instructions
+         constant PRIV   : std_logic_vector(2 downto 0) :="000";--Instructions to return from trap are encoded under the PRIV minor opcode.       
          constant CSRRW  : std_logic_vector(2 downto 0) :="001";--CSR Read/Write
          constant CSRRS  : std_logic_vector(2 downto 0) :="010";--CSR Read and Set Bit
          constant CSRRC  : std_logic_vector(2 downto 0) :="011";--CSR Read and Clear bit
          constant CSRRWI : std_logic_vector(2 downto 0) :="101";--CSR Read and Write Immediate
          constant CSRRSI : std_logic_vector(2 downto 0) :="110";--CSR Read and Set Immediate
          constant CSRRCI : std_logic_vector(2 downto 0) :="111";--CSR Read and Clear Immediate
+constant MRET : std_logic_vector(6 downto 0) :="0011000";--Machine trap return
+
 
  --CSR write sources
  constant CSR_W_SRC_RS1     : std_logic_vector(1 downto 0) :="00";
@@ -118,4 +118,5 @@ constant U_IMM : std_logic_vector(2 downto 0) :="011";
 constant J_IMM : std_logic_vector(2 downto 0) :="100";
 constant Z_IMM  : std_logic_vector(2 downto 0) :="101";--zero extended immediate
 constant Z_IMM_BAR : std_logic_vector(2 downto 0) :="110";
+
 end package;

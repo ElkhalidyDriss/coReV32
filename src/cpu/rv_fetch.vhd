@@ -12,11 +12,11 @@ port (
 	   clk , rst_n : in std_logic;--clock and active low reset
         --Control signals
         pc_next_src : in std_logic_vector(2 downto 0);
-        pc_hold : in std_logic;--flag indicates hold the current value of the program counter
+        pc_hold     : in std_logic;--flag indicates hold the current value of the program counter
         --program counter update sources
         branch_target : in std_logic_vector(31 downto 0); --branch target address
-        jump_target : in std_logic_vector(31 downto 0); --jump target address
-        csr_mepc : in std_logic_vector(31 downto 0); --Machine Exception Program Counter
+        jump_target   : in std_logic_vector(31 downto 0); --jump target address
+        csr_mepc      : in std_logic_vector(31 downto 0); --Machine Exception Program Counter
         --Exception/Interrupt handler address
         mtvec : in std_logic_vector(31 downto 0);--Machine trap-vector base-address register
         exc_cause : in std_logic_vector(1 downto 0);
@@ -52,7 +52,7 @@ PC : process(clk)
              if rst_n = '0' then
                 pc_curr <= BOOT_ADDR(31 downto 2)&"00";--MAking sure instruction address is aligned 
                 prog_mem_req <= '1';
-             else 
+             else
                  if (prog_mem_valid_o = '1' and stall = '0' and instr_req = '1' and pc_hold='0' ) then --fetch the next instruction
                      pc_curr <= pc_next;
                      prog_mem_req <= '1';
@@ -82,9 +82,11 @@ PC_NEXT_LOGIC : process(pc_next_src)
                                pc_next <= pc_curr; 
                           end case;  
                 end process;
-instr_ready_int <= prog_mem_valid_o and not(stall) and not(pc_hold) and instr_req;
+
+instr_ready_int <= prog_mem_valid_o and not(stall) and not(pc_hold) and instr_req and valid_branch_i = '1' when branch = '1' 
+                   else prog_mem_valid_o and not(stall) and not(pc_hold) and instr_req;
 instr_ready <= instr_ready_int;
-INSTR_UPDATE : process(instr_ready_int)
+process(instr_ready_int)
                begin
                     if(instr_ready_int = '1') then
                          instr_data  <=  prog_mem_data_in;

@@ -5,7 +5,7 @@
 ---------------------------------------------------------------------------------------
 
 
-
+ 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -14,13 +14,14 @@ use work.rv_package.all;
 
 entity rv_decoder is 
 port (
+      valid_o : out std_logic;
       --instruction
-      instr_data   : in std_logic_vector(31 downto 0);
+      instr_data    : in std_logic_vector(31 downto 0);
+      illegal_instr : out std_logic;
       --Register file 
       reg_file_raddr1    : out std_logic_vector(4 downto 0);
       reg_file_raddr2    : out std_logic_vector(4 downto 0);
       reg_file_waddr     : out std_logic_vector(4 downto 0);  
-      reg_file_wdata     : out std_logic_vector(31 downto 0);
       reg_file_wdata_src : out std_logic_vector(2 downto 0);
       reg_file_we        : out std_logic;
       --Branch/JUMP  
@@ -31,8 +32,6 @@ port (
       alu_operand_a_src     : out std_logic_vector(2 downto 0);--alu operand a source 
       alu_operand_b_src     : out std_logic_vector(2 downto 0);
       alu_op                : out std_logic_vector(3 downto 0);--alu operation
-      alu_operand_a_val     : out std_logic_vector(31 downto 0);--alu operand a value
-      alu_operand_b_val     : out std_logic_vector(31 downto 0);--alu operand b value
       --Data Memory
       data_mem_size : out std_logic_vector(2 downto 0); -- word size to be retrieved from memory (byte , short or int)
       data_mem_we        : out std_logic;--data memory write enable
@@ -59,17 +58,19 @@ signal uimm  : std_logic_vector(31 downto 0);--Unsigned immediate for CSR instru
 signal imm_mux_sel : std_logic_vector(2 downto 0);
 signal uimm_bar : std_logic_vector(31 downto 0);
 --
-signal opcode : std_logic_vector(6 downto 0);
-signal funct3 : std_logic_vector(2 downto 0);
-signal funct7 : std_logic;
+signal opcode  : std_logic_vector(6 downto 0);
+signal funct3  : std_logic_vector(2 downto 0);
+signal funct7  : std_logic;--funct7 is 7 bits wide but we are interested only in one bit 
+signal funct12 : std_logic_vector(6 downto 0);--funct12 is 12 bits wide but until now we only care about the 7 most significant bits
 begin
 --Registers  address decodeing
 reg_file_raddr1 <= instr_data(19 downto 15);
 reg_file_raddr2 <= instr_data(24 downto 20);
 reg_file_waddr  <= instr_data(11 downto 7);
 --funct field
-funct3 <= instr_data(14 downto 12);
-funct7 <= instr_data(30);--funct7 is 7 bits wide , but we are interessed only on the 6th bit
+funct3  <= instr_data(14 downto 12);
+funct7  <= instr_data(30);
+funct12 <= instr_data(31 downto 25);
 --Immediates decoding
 imm_i <= (31 downto 11 => instr_data(31))&instr_data(30 downto 25)&instr_data(24 downto 21)&instr_data(20);
 imm_s <= (31 downto 11 => instr_data(31))&instr_data(30 downto 25)&instr_data(11 downto 8)&instr_data(7);
@@ -98,18 +99,19 @@ begin
             when others => imm_extended <= (others => '0');
       end case;
 end process;
---CSR unit 
-csr_addr <= instr_data(31 downto 20);
 --Instruction decoding 
 opcode <= instr_data(6 downto 0);
 process(opcode)
 begin
+      illegal_instr <= '0';
+      valid_o <= '0';
       case (opcode) is
             when LUI =>--Load upper immediate
                   reg_file_wdata_src <= W_SRC_IMM;
                   reg_file_we <= '1';--register file write enable
                   pc_next_src <= PC_INCREMENT;
                   imm_mux_sel <= U_IMM;
+                  valid_o <= '1';
             when AUIPC =>--Add upper immediate to PC
                   reg_file_wdata_src <= W_SRC_IMM;
                   reg_file_we <= '1';
@@ -118,6 +120,7 @@ begin
                   alu_op <= ALU_ADD;
                   imm_mux_sel <= U_IMM;
                   pc_next_src <= PC_INCREMENT;
+                  valid_o <= '1';
             when JAL =>--jump and link
                   reg_file_wdata_src <= W_SRC_PC_PLUS_4;--write next instruction address to dest reg
                   reg_file_we <= '1';
@@ -127,6 +130,7 @@ begin
                   imm_mux_sel <= J_IMM;
                   pc_next_src <= PC_JUMP;
                   jump_t <= '0';--jump type is JAL
+                  valid_o <= '1';
             when JALR =>--jump and link register
                   reg_file_wdata_src <= W_SRC_PC_PLUS_4;--CURRENT PC + 4
                   reg_file_we <= '1';
@@ -136,6 +140,7 @@ begin
                   imm_mux_sel <= I_IMM;
                   pc_next_src <= PC_JUMP;
                   jump_t <= '1';--jump type is JALR
+                  valid_o <= '1';
             when BRANCH =>
                   alu_operand_a_src <= ALU_OPERAND_RS1;
                   alu_operand_b_src <= ALU_OPERAND_RS2;
@@ -156,6 +161,7 @@ begin
                   branch_t  <= funct3;--Branch type
                   alu_op <= ALU_SLT;
                   pc_next_src <= PC_BRANCH;
+                  valid_o <= '1';
             when  LD =>--Load instructions
                   data_mem_en <= '1';--data memory enable
                   data_mem_we <= '0';
@@ -167,6 +173,7 @@ begin
                   alu_op <= ALU_ADD;
                   imm_mux_sel <= I_IMM;
                   pc_next_src <= PC_INCREMENT;
+                  valid_o <= '1';
             When  STR => --Store instructions
                   data_mem_en <= '1';--data memory enable
                   data_mem_we <= '1';--data memory write enable 
@@ -176,6 +183,7 @@ begin
                   alu_operand_b_src <= ALU_OPERAND_SRC_IMM;
                   imm_mux_sel <= S_IMM;
                   alu_op <= ALU_ADD;
+                  valid_o <= '1';
             when  OP => --Register to Register Arithmetic
                   reg_file_wdata_src <= W_SRC_ALU_RES;
                   reg_file_we <= '1';
@@ -183,6 +191,7 @@ begin
                   alu_operand_b_src <= ALU_OPERAND_RS2;
                   alu_op <= funct7 & funct3;
                   pc_next_src <= PC_INCREMENT;
+                  valid_o <= '1';
             when OP_IMM => --Register to Immediate Arithmetic
                   reg_file_wdata_src <= W_SRC_ALU_RES;
                   reg_file_we <= '1';
@@ -191,13 +200,20 @@ begin
                   alu_op <= funct7 & funct3;
                   imm_mux_sel <= I_IMM;
                   pc_next_src <= PC_INCREMENT;
-            when  CSR =>--Control & Status register instructions
-                  reg_file_wdata_src <= W_SRC_CSR;
-                  reg_file_we <= '1';
-                  case funct3 is
+                  valid_o <= '1';
+            when  SYSTEM =>--Control & Status register instructions and Interrupt handling 
+                  if funct3 = PRIV then 
+                     if (funct12 = MRET) then --Return from trap by setting restoring the program counter from mepc register
+                        csr_addr <= MEPC_ADDR;
+                        pc_next_src <= PC_MPEC_RESTORE; 
+                    end if;   
+                  else 
+                      reg_file_wdata_src <= W_SRC_CSR;                        
+                      reg_file_we <= '1';
+                      csr_addr <= instr_data(31 downto 20);
+                      case funct3 is
                         when CSRRW => --CSR Read/Write
                              csr_wdata_src <= CSR_W_SRC_RS1;
-                             reg_file_r1_en <= '1';
                         when CSRRS => --CSR Read and Set bit
                              csr_wdata_src <= CSR_W_SRC_ALU_RES;
                              alu_operand_a_src <= ALU_OPERAND_RS1;
@@ -223,10 +239,13 @@ begin
                              alu_operand_b_src <= ALU_OPERAND_SRC_IMM;
                              alu_op <= ALU_AND;
                              imm_mux_sel <= Z_IMM_BAR;
-                        when others => null;
-                  end case;
-                  pc_next_src <= PC_INCREMENT;
-            when others => null;
+                        when others => illegal_instr <= '1';
+                      end case;
+                      pc_next_src <= PC_INCREMENT;
+                  end if;
+                  valid_o <= '1';
+            when others => 
+                  illegal_instr <= '1';
       end case;
 end process;
 end architecture;
