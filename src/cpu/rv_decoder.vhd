@@ -28,6 +28,7 @@ port (
       branch_t : out std_logic_vector(2 downto 0);--branch type (BEQ , BNE , BLT , BGE , BLTU , BGEU)
       jump_t   : out std_logic;--jump type
                                -- '0' JAL ; '1' JALR
+      branch_flag_o : out std_logic; --flag to indicate that a branch or jump has been occured 
       --ALU
       alu_operand_a_src     : out std_logic_vector(2 downto 0);--alu operand a source 
       alu_operand_b_src     : out std_logic_vector(2 downto 0);
@@ -103,6 +104,7 @@ end process;
 opcode <= instr_data(6 downto 0);
 process(opcode)
 begin
+      branch_flag_o <= '0';
       illegal_instr <= '0';
       valid_o <= '0';
       case (opcode) is
@@ -130,6 +132,7 @@ begin
                   imm_mux_sel <= J_IMM;
                   pc_next_src <= PC_JUMP;
                   jump_t <= '0';--jump type is JAL
+                  branch_flag_o <= '1';
                   valid_o <= '1';
             when JALR =>--jump and link register
                   reg_file_wdata_src <= W_SRC_PC_PLUS_4;--CURRENT PC + 4
@@ -139,6 +142,7 @@ begin
                   alu_op <= ALU_ADD;
                   imm_mux_sel <= I_IMM;
                   pc_next_src <= PC_JUMP;
+                  branch_flag_o <= '1';
                   jump_t <= '1';--jump type is JALR
                   valid_o <= '1';
             when BRANCH =>
