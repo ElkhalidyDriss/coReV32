@@ -17,57 +17,58 @@ port (
    clk   : in std_logic;
    rst_n : in std_logic;--active low reset
    --fetch unit
-   pc_hold       : out std_logic;
-   fetch_valid_o : in std_logic;
-   pc_next_src   : out std_logic_vector(2 downto 0);
+   --pc_hold       : out std_logic; 
+   fetch_valid_o : in std_logic;--fetch has valid output 
    instr_data_fd : in std_logic_vector(31 downto 0);--instruction data comming from fetch to decode stage
    instr_addr_fd : in std_logic_vector(31 downto 0);--current instruction address comming from fetch to decode
    pc_plus_4_fd  : in std_logic_vector(31 downto 0);--next instruction address
-   illegal_instr_o : out std_logic;
    --Execute unit
-   instr_addr_dx : out std_logic_vector(31 downto 0);--current instruction address comming from decode to execute stage
-   pc_plus_4_dx  : out std_logic_vector(31 downto 0);--next instruction address
-   valid_pc_update : in std_logic;--valid value of the pc update comming from the execute stage
-   --
-   pc_plus_4_wb   : in std_logic_vector(31 downto 0);--current program counter + 4 from write back stage
-   
+   instr_addr_dx    : out std_logic_vector(31 downto 0);--current instruction address comming from decode to execute stage
+   pc_plus_4_dx     : out std_logic_vector(31 downto 0);--next instruction address
+   pc_next_src_dx   : out std_logic_vector(2 downto 0);--decode-execute pc next source select signal
+   --Write back unit 
+   reg_f_we_wb       : in  std_logic;
+   pc_plus_4_wb      : in  std_logic_vector(31 downto 0);--current program counter + 4 from write back stage
+   imm_u_wb          : in  std_logic_vector(31 downto 0);--imm_u type from write back stage 
+   alu_res_wb        : in  std_logic_vector(31 downto 0);--alu result from write back stage 
+   data_mem_rdata_wb : in  std_logic_vector(31 downto 0);--data memory output from write back stage
+   csr_rdata_wb      : in   std_logic_vector(31 downto 0);--output data of selected control status register from write back stage
    --Register file
-   reg_f_rdata1_dx     : out std_logic_vector(31 downto 0);--read address for port 1 
+   reg_f_rdata1_dx     : out std_logic_vector(31 downto 0);--read address for port 1 for decode-execute stage  
    reg_f_rdata1_bar_dx : out std_logic_vector(31 downto 0);--not logic of reg_f_rdata1
    reg_f_rdata2_dx     : out std_logic_vector(31 downto 0);--read address for port 2
    reg_f_waddr_dx      : out std_logic_vector(4 downto 0);--address of the destination register 
    reg_f_we_dx         : out std_logic;
-   reg_f_we_wb         : in std_logic;
-   --ALU 
-   alu_operand_a_val_dx : out std_logic_vector(31 downto 0);
-   alu_operand_a_val_dx : out std_logic_vector(31 downto 0);
 
+   --ALU 
    alu_operand_a_src_dx : out std_logic_vector(2 downto 0);--alu operand a source 
    alu_operand_b_src_dx : out std_logic_vector(2 downto 0);--alu operand b source 
    alu_op_dx            : out std_logic_vector(3 downto 0);--alu operation
-   alu_res_wb           : in  std_logic_vector(31 downto 0);--alu result from write back stage 
    --Branch/JUMP
    branch_t_dx : out std_logic_vector(2 downto 0);--branch type (BEQ , BNE , BLT , BGE , BLTU , BGEU)
    jump_t_dx   : out std_logic;--jump type
-                             -- '0' JAL 
-                             -- '1' JALR
+                             -- '0' : JAL 
+                             -- '1' : JALR
    --Data Memory
    data_mem_size_dx  : out std_logic_vector(2 downto 0); -- word size to be retrieved from memory (byte , short or int)
    data_mem_we_dx    : out std_logic;--data memory write enable
    data_mem_en_dx    : out std_logic;--data memory enable
-   data_mem_rdata_wb : in std_logic_vector(31 downto 0);--data memory output from write back stage
    --Control & Status registers
    csr_addr_dx      : out  std_logic_vector(11 downto 0);
    csr_wdata_src_dx : out  std_logic_vector(1 downto 0);
-   csr_rdata_wb     : in   std_logic_vector(31 downto 0);--output data of selected control status register from write back stage
    --Decoded immediate value 
    imm_extended_dx : out std_logic_vector(31 downto 0);--extended immediate value
-   imm_u_wb        : in  std_logic_vector(31 downto 0);--imm_u type from write back stage 
-   --pipeline
-   stall          : in std_logic;
-   decode_ready   : out std_logic;--ready to receive the next instruction
-   decode_valid_o_dx : out std_logic;--decode is done 
-   execute_ready  : in std_logic--execute is ready for receiving the decoded instruction
+   --pipeline and hazards unit 
+   stall                  : in std_logic;
+   decode_ready           : out std_logic;--ready to receive the next instruction
+   decode_valid_o_dx      : out std_logic;--decode is done 
+   execute_ready          : in std_logic--execute is ready for receiving the decoded instruction
+   hazard_branch_o        : out std_logic;--flag idicates to hazard unit that a branch or a jump  occured 
+   hazard_illegal_instr_o : out std_logic;--flag indicates to hazard unit that there is an illegal instruction
+   hazard_rf_rs1_id       : out std_logic_vector(4 downto 0);--register source 1 address from instruction decode stage to hazard unit 
+   hazard_rf_rs2_id       : out std_logic_vector(4 downto 0);   
+
+
 );
 end entity;
 
@@ -124,9 +125,10 @@ component rv_decoder
           reg_file_wdata_src : out std_logic_vector(2 downto 0);
           reg_file_we        : out std_logic;
           --Branch/JUMP  
-          branch_t : out std_logic_vector(2 downto 0);--branch type (BEQ , BNE , BLT , BGE , BLTU , BGEU)
-          jump_t   : out std_logic;--jump type
-                                   -- '0' JAL ; '1' JALR
+          branch_t      : out std_logic_vector(2 downto 0);--branch type (BEQ , BNE , BLT , BGE , BLTU , BGEU)
+          jump_t        : out std_logic;--jump type
+                                        -- '0' JAL ; '1' JALR
+          branch_flag_o : out std_logic; --flag to indicate that a branch or jump has been occured 
           --ALU
           alu_operand_a_src     : out std_logic_vector(2 downto 0);--alu operand a source 
           alu_operand_b_src     : out std_logic_vector(2 downto 0);
@@ -145,40 +147,33 @@ component rv_decoder
     );
 end component;
 begin
-decoder : rv_decoder port map (
-    valid_o           => decode_valid_o,
-    instr_data        => instr_data,
-    illegal_instr     => illegal_instr,
-    alu_operand_a_src => alu_operand_a_src,
-    alu_operand_b_src => alu_operand_b_src,
-    alu_op            => alu_op,
-    reg_file_raddr1 => reg_file_raddr1,
-    reg_file_raddr2 => reg_file_raddr2,
-    reg_file_waddr  => reg_file_waddr,
+instruction_decoder : rv_decoder port map (
+    valid_o            => decode_valid_o, 
+    instr_data         => instr_data,
+    illegal_instr      => illegal_instr,
+    alu_operand_a_src  => alu_operand_a_src,
+    alu_operand_b_src  => alu_operand_b_src,
+    alu_op             => alu_op,
+    reg_file_raddr1    => reg_file_raddr1,
+    reg_file_raddr2    => reg_file_raddr2,
+    reg_file_waddr     => reg_file_waddr,
     reg_file_wdata_src => reg_file_wdata_src,
-    reg_file_we => reg_file_we,
-    branch_t => branch_t,
-    jump_t => jump_t,
-    data_mem_size     => data_mem_size,
-    data_mem_we       => data_mem_we,
-    data_mem_en       => data_mem_en,
-    csr_addr          => csr_addr,
-    csr_wdata_src     => csr_wdata_src,
-    pc_next_src       => pc_next_src_int,
-    imm_extended      => imm_extended
+    reg_file_we        => reg_file_we,
+    branch_t           => branch_t,
+    jump_t             => jump_t,
+    branch_flag_o      => hazard_branch_o,
+    data_mem_size      => data_mem_size,
+    data_mem_we        => data_mem_we,
+    data_mem_en        => data_mem_en,
+    csr_addr           => csr_addr,
+    csr_wdata_src      => csr_wdata_src,
+    pc_next_src        => pc_next_src_int,
+    imm_extended       => imm_extended
 );
---Deciding wether holding the program counter or not 
-process(pc_next_src_int , valid_pc_update)
-begin
-    if ((pc_next_src_int = (PC_INCREMENT or PC_RST) or valid_pc_update = '1')  and stall = '0')    then --no need to hold the pc
-        pc_hold <= '0';
-    else --
-        pc_hold <= '1';
-    end if;
-end process;
+
 reg_file : rv_reg_file port map (
-    clk => clk,
-    raddr1  => reg_file_raddr1,
+    clk    => clk,
+    raddr1 => reg_file_raddr1,
     raddr2 => reg_file_raddr2,
     rdata1 => reg_file_rdata1,
     rdata2 => reg_file_rdata2,
@@ -194,7 +189,7 @@ begin
             reg_file_wdata <= alu_res_wb;
         when W_SRC_CSR => --write selected csr data to destination register
             reg_file_wdata <= csr_rdata_wb;
-        when W_SRC_PC_PLUS_4 => 
+        when W_SRC_PC_PLUS_4 => --save the address of the next instruction to destination register 
             reg_file_wdata <= pc_plus_4_wb;
         when W_SRC_DATA_MEM => --write output of  data memory data to destination register
             reg_file_wdata <= data_mem_rdata_wb;
@@ -203,10 +198,10 @@ begin
         when others => null;
      end case;
 end process;
-reg_f_rdata1_bar <= not reg_file_rdata2;
----------------------------------------------------------------------------
---                    DECODE-EXECUTE STAGE PIPELINE                      --
---------------------------------------------------------------------------- 
+reg_f_rdata1_bar <= not reg_file_rdata2;--this value is needed for some instructions 
+--------------------------------------------------------------
+--                DECODE-EXECUTE STAGE PIPELINE             --
+-------------------------------------------------------------- 
 process(clk)
 begin
     if rising_edge(clk) then
@@ -227,10 +222,10 @@ begin
           pc_next_src       <= PC_RST;
           decode_valid_o_dx    <= '0';
        else
-           if (fetch_valid_o = '1') then
+           if (fetch_valid_o = '1') then --load the instruction for porocessing
                  instr_data <= instr_data_fd;
-                 decode_valid_o <= '0';
-           elsif (stall = '1') then 
+                 decode_valid_o_dx <= '0';--decode stage not finished yet 
+           elsif (stall = '1') then --freeze decode stage 
                  decode_ready      <= '0';--decode stage is not ready for receiving new instruction
                  decode_valid_o_dx <= '0';--decode stage has no valid output
            elsif (execute_ready = '1' and illegal_instr = '0' and decode_valid_o = '1') then--execute stage is ready to receive decoded instruction
@@ -248,11 +243,14 @@ begin
                  csr_addr_dx          <= csr_addr;
                  decode_valid_o_dx    <= '1';
            else 
-                 decode_valid_o <= '0';
+                 decode_valid_o_dx <= '0';
                  decode_ready <= '1';
            end if;
        end if;
     end if;
 end process;
-illegal_instr_o <= illegal_instr;
+
+hazard_illegal_instr_o <= illegal_instr;
+hazard_rf_rs1_id <= instr_data_fd(19 downto 15);
+hazard_rf_rs2_id <= instr_data_fd(24 downto 20);
 end architecture;
