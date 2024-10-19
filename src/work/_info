@@ -1,0 +1,166 @@
+m255
+K4
+z2
+!s11e vcom 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+d/home/idriss
+Erv_decode
+Z0 w1729379941
+Z1 DPx4 work 10 rv_package 0 22 mi_o[Sd=]0_=Qz4l[hekX0
+Z2 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z4 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 7
+Z5 d/home/idriss/Documents/Project/coReV32/src
+Z6 8/home/idriss/Documents/Project/coReV32/src/cpu/rv_decode.vhd
+Z7 F/home/idriss/Documents/Project/coReV32/src/cpu/rv_decode.vhd
+l0
+Z8 L15 1
+VVFOBdzf13iV1<3g7jX[c53
+!s100 7:Yf?Db[F>gDUfdb5`bk[3
+Z9 OV;C;2020.1;71
+32
+Z10 !s110 1729379975
+!i10b 1
+Z11 !s108 1729379975.000000
+Z12 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/cpu/rv_decode.vhd|
+Z13 !s107 /home/idriss/Documents/Project/coReV32/src/cpu/rv_decode.vhd|
+!i113 1
+Z14 o-work work -2002 -explicit
+Z15 tExplicit 1 CvgOpt 0
+Arv_decode_arch
+R1
+R2
+R3
+R4
+Z16 DEx4 work 9 rv_decode 0 22 VFOBdzf13iV1<3g7jX[c53
+!i122 7
+l149
+Z17 L75 183
+Z18 V^@RNjQg1PID[i7G:HU[>M0
+Z19 !s100 2;YM;HffIH;2NK70jhcYT2
+R9
+32
+R10
+!i10b 1
+R11
+R12
+R13
+!i113 1
+R14
+R15
+Erv_decoder
+Z20 w1729376880
+R1
+R2
+R3
+R4
+!i122 5
+R5
+Z21 8/home/idriss/Documents/Project/coReV32/src/cpu/rv_decoder.vhd
+Z22 F/home/idriss/Documents/Project/coReV32/src/cpu/rv_decoder.vhd
+l0
+R8
+V9WGI[LK9YcWT8T1UAJ6iO2
+!s100 THg[PM>oZ`mQBH2Y@J[;[1
+R9
+32
+Z23 !s110 1729379965
+!i10b 1
+Z24 !s108 1729379965.000000
+Z25 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/cpu/rv_decoder.vhd|
+Z26 !s107 /home/idriss/Documents/Project/coReV32/src/cpu/rv_decoder.vhd|
+!i113 1
+R14
+R15
+Arv_decode_arch
+R1
+R2
+R3
+R4
+DEx4 work 10 rv_decoder 0 22 9WGI[LK9YcWT8T1UAJ6iO2
+!i122 5
+l66
+L51 205
+VJ]z[C7?Bdz31kOk1M:ffX3
+!s100 PAlaij>I<2jiAj7ULS=LG3
+R9
+32
+R23
+!i10b 1
+R24
+R25
+R26
+!i113 1
+R14
+R15
+Prv_package
+R3
+R4
+!i122 6
+w1728983810
+R5
+8/home/idriss/Documents/Project/coReV32/src/cpu/rv_package.vhd
+F/home/idriss/Documents/Project/coReV32/src/cpu/rv_package.vhd
+l0
+L6 1
+Vmi_o[Sd=]0_=Qz4l[hekX0
+!s100 k1Qnc:bY_jakM;Z==Qg@n1
+R9
+32
+!s110 1729379972
+!i10b 1
+!s108 1729379971.000000
+!s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/cpu/rv_package.vhd|
+!s107 /home/idriss/Documents/Project/coReV32/src/cpu/rv_package.vhd|
+!i113 1
+R14
+R15
+Erv_reg_file
+Z27 w1728770106
+R2
+R3
+R4
+!i122 4
+R5
+Z28 8/home/idriss/Documents/Project/coReV32/src/cpu/rv_reg_file.vhd
+Z29 F/home/idriss/Documents/Project/coReV32/src/cpu/rv_reg_file.vhd
+l0
+L12 1
+V_mmg=NE<2iX;`4z3Mc<1S1
+!s100 WBS:^LBF6NcbSALSM9Tb00
+R9
+32
+Z30 !s110 1729379958
+!i10b 1
+Z31 !s108 1729379958.000000
+Z32 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/cpu/rv_reg_file.vhd|
+Z33 !s107 /home/idriss/Documents/Project/coReV32/src/cpu/rv_reg_file.vhd|
+!i113 1
+R14
+R15
+Arv_reg_file_arch
+R2
+R3
+R4
+DEx4 work 11 rv_reg_file 0 22 _mmg=NE<2iX;`4z3Mc<1S1
+!i122 4
+l31
+L26 17
+VKl]W@lDZz>j`QzbHo5VG^0
+!s100 :c8Qe=_TC[DKPBBN6c<4h2
+R9
+32
+R30
+!i10b 1
+R31
+R32
+R33
+!i113 1
+R14
+R15

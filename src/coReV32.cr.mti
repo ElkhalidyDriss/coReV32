@@ -1,0 +1,37 @@
+/home/idriss/Documents/Project/coReV32/src/cpu/rv_reg_file.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/idriss/Documents/Project/coReV32/src/cpu/rv_reg_file.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity rv_reg_file
+-- Compiling architecture rv_reg_file_arch of rv_reg_file
+
+} {} {}} /home/idriss/Documents/Project/coReV32/src/cpu/rv_decoder.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/idriss/Documents/Project/coReV32/src/cpu/rv_decoder.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package rv_package
+-- Compiling entity rv_decoder
+-- Compiling architecture rv_decode_arch of rv_decoder
+
+} {} {}} /home/idriss/Documents/Project/coReV32/src/cpu/rv_decode.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/idriss/Documents/Project/coReV32/src/cpu/rv_decode.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package rv_package
+-- Compiling entity rv_decode
+-- Compiling architecture rv_decode_arch of rv_decode
+
+} {} {}} /home/idriss/Documents/Project/coReV32/src/cpu/rv_package.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/idriss/Documents/Project/coReV32/src/cpu/rv_package.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package rv_package
+
+} {} {}}
