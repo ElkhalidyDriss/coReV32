@@ -62,11 +62,11 @@ port (
    stall                  : in std_logic;
    decode_ready           : out std_logic;--ready to receive the next instruction
    decode_valid_o_dx      : out std_logic;--decode is done 
-   execute_ready          : in std_logic--execute is ready for receiving the decoded instruction
+   execute_ready          : in std_logic;--execute is ready for receiving the decoded instruction
    hazard_branch_o        : out std_logic;--flag idicates to hazard unit that a branch or a jump  occured 
    hazard_illegal_instr_o : out std_logic;--flag indicates to hazard unit that there is an illegal instruction
    hazard_rf_rs1_id       : out std_logic_vector(4 downto 0);--register source 1 address from instruction decode stage to hazard unit 
-   hazard_rf_rs2_id       : out std_logic_vector(4 downto 0);   
+   hazard_rf_rs2_id       : out std_logic_vector(4 downto 0)  
 
 
 );
@@ -95,7 +95,7 @@ signal data_mem_we        : std_logic;--data memory write enable
 signal data_mem_en        : std_logic;--data memory enable
 signal csr_addr           : std_logic_vector(11 downto 0);
 signal csr_wdata_src      : std_logic_vector(1 downto 0); 
-signal pc_next_src_int        : std_logic_vector(2 downto 0);--pc next source internal signal
+signal pc_next_src        : std_logic_vector(2 downto 0);--pc next source internal signal
 signal imm_extended       : std_logic_vector(31 downto 0);--extended immediate value 
 --Component declaration
 component rv_reg_file
@@ -167,7 +167,7 @@ instruction_decoder : rv_decoder port map (
     data_mem_en        => data_mem_en,
     csr_addr           => csr_addr,
     csr_wdata_src      => csr_wdata_src,
-    pc_next_src        => pc_next_src_int,
+    pc_next_src        => pc_next_src,
     imm_extended       => imm_extended
 );
 
@@ -219,7 +219,7 @@ begin
           alu_op_dx            <= (others => '0');
           csr_wdata_src_dx     <= (others => '0');
           csr_addr_dx          <= (others => '0');
-          pc_next_src       <= PC_RST;
+          pc_next_src_dx       <= PC_RST;
           decode_valid_o_dx    <= '0';
        else
            if (fetch_valid_o = '1') then --load the instruction for porocessing
@@ -241,6 +241,7 @@ begin
                  alu_op_dx            <= alu_op;
                  csr_wdata_src_dx     <= csr_wdata_src;
                  csr_addr_dx          <= csr_addr;
+                 pc_next_src_dx       <= pc_next_src;
                  decode_valid_o_dx    <= '1';
            else 
                  decode_valid_o_dx <= '0';
