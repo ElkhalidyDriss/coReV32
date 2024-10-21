@@ -2,7 +2,7 @@
 --  Author: Driss Elkhalidy , an embedded systems engineering student @INPT          --
 --  Description : rv_decoder testbench                                               -- 
 ---------------------------------------------------------------------------------------
- 
+
 
 library ieee;
 use ieee.std_logic_1164.all;

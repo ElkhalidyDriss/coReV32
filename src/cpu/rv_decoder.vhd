@@ -102,7 +102,7 @@ begin
 end process;
 --Instruction decoding 
 opcode <= instr_data(6 downto 0);
-process(opcode)
+process(opcode , funct3 )
 begin
       branch_flag_o <= '0';
       illegal_instr <= '0';
@@ -165,6 +165,7 @@ begin
                   branch_t  <= funct3;--Branch type
                   alu_op <= ALU_SLT;
                   pc_next_src <= PC_BRANCH;
+                  branch_flag_o <= '1';
                   valid_o <= '1';
             when  LD =>--Load instructions
                   data_mem_en <= '1';--data memory enable

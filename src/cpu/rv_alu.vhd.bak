@@ -7,7 +7,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-use work.rv_package.all;
 
 
 entity rv_alu is 

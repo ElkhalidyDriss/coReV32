@@ -48,10 +48,10 @@ signal csr_wdata_src_dx_tb        : std_logic_vector(1 downto 0);
 -- Immediate Value
 signal imm_extended_dx_tb         : std_logic_vector(31 downto 0);
 -- Pipeline and Hazard Unit
-signal stall_tb                   : std_logic;
+signal stall_tb                   : std_logic := '0';
 signal decode_ready_tb            : std_logic;
 signal decode_valid_o_dx_tb       : std_logic;
-signal execute_ready_tb           : std_logic ;
+signal execute_ready_tb           : std_logic := '1';
 signal hazard_branch_o_tb         : std_logic;
 signal hazard_illegal_instr_o_tb  : std_logic;
 signal hazard_rf_rs1_id_tb        : std_logic_vector(4 downto 0);
@@ -182,21 +182,19 @@ begin
     rst_n_tb <= '1';
     wait for 20 ns;
     --TEST 1 :  Loading instruction data and program counter from Fetch unit
-    report "TEST 1 :  Loading instruction data and program counter from Fetch unit";
-    stall_tb <= '0';
-    execute_ready_tb <= '1';--execute is ready for receiving decoded instruction
+    report "TEST 1 :  Loading instruction data and program counter from Fetch unit"
     fetch_valid_o_tb <= '1';--fetch has valid outptut
     instr_data_fd_tb <= x"123452B7"; --lui x5, 0x12345
-    instr_addr_fd_tb <= x"00000001"; --Example address
+    instr_addr_fd_tb <= x"00000000"; --Example address
     pc_plus_4_fd_tb  <= x"00000004"; --Next address
     wait for CLK_PERIOD;
-    assert instr_addr_dx_tb = x"00000001" 
+    fetch_valid_o_tb <= '0';--fetch has no valid output 
+    assert instr_addr_dx_tb = x"00000000" 
            report "TEST 1 Failed : Incorrect current instruction address" 
            severity error;
     assert pc_plus_4_dx_tb  = x"00000004" 
-           report "TEST 1 Failed : Incorrect next instruction Address"
+           report "TEST 2 Failed : Incorrect next instruction Address"
            severity error;
-    fetch_valid_o_tb <= '0';--fetch has no valid output 
     
     wait;
 end process;

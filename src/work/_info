@@ -9,41 +9,41 @@ z2
 !i10f 100
 cModel Technology
 d/home/idriss
-Erv_decode
-Z0 w1729379941
+Erv_alu
+Z0 w1729437237
 Z1 DPx4 work 10 rv_package 0 22 mi_o[Sd=]0_=Qz4l[hekX0
 Z2 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
 Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z4 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
-!i122 7
+!i122 50
 Z5 d/home/idriss/Documents/Project/coReV32/src
-Z6 8/home/idriss/Documents/Project/coReV32/src/cpu/rv_decode.vhd
-Z7 F/home/idriss/Documents/Project/coReV32/src/cpu/rv_decode.vhd
+Z6 8/home/idriss/Documents/Project/coReV32/src/cpu/rv_alu.vhd
+Z7 F/home/idriss/Documents/Project/coReV32/src/cpu/rv_alu.vhd
 l0
-Z8 L15 1
-VVFOBdzf13iV1<3g7jX[c53
-!s100 7:Yf?Db[F>gDUfdb5`bk[3
+Z8 L13 1
+VZINgEnHCYOzz1_>0W>e750
+!s100 _zaR=Y3Oc5UY2Z]VQJi[13
 Z9 OV;C;2020.1;71
 32
-Z10 !s110 1729379975
+Z10 !s110 1729437244
 !i10b 1
-Z11 !s108 1729379975.000000
-Z12 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/cpu/rv_decode.vhd|
-Z13 !s107 /home/idriss/Documents/Project/coReV32/src/cpu/rv_decode.vhd|
+Z11 !s108 1729437244.000000
+Z12 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/cpu/rv_alu.vhd|
+Z13 !s107 /home/idriss/Documents/Project/coReV32/src/cpu/rv_alu.vhd|
 !i113 1
 Z14 o-work work -2002 -explicit
 Z15 tExplicit 1 CvgOpt 0
-Arv_decode_arch
+Arv_alu_arch
 R1
 R2
 R3
 R4
-Z16 DEx4 work 9 rv_decode 0 22 VFOBdzf13iV1<3g7jX[c53
-!i122 7
-l149
-Z17 L75 183
-Z18 V^@RNjQg1PID[i7G:HU[>M0
-Z19 !s100 2;YM;HffIH;2NK70jhcYT2
+DEx4 work 6 rv_alu 0 22 ZINgEnHCYOzz1_>0W>e750
+!i122 50
+l22
+L21 45
+VbD]lSSSUe^EDAf55a<cfg3
+!s100 8z2A:Fg>0XRn4e5_[nQ7G1
 R9
 32
 R10
@@ -54,27 +54,158 @@ R13
 !i113 1
 R14
 R15
-Erv_decoder
-Z20 w1729376880
+Erv_alu_tb
+Z16 w1727475479
+R2
+R3
+R4
+!i122 28
+R5
+Z17 8/home/idriss/Documents/Project/coReV32/src/testbench/rv_alu_tb.vhd
+Z18 F/home/idriss/Documents/Project/coReV32/src/testbench/rv_alu_tb.vhd
+l0
+R8
+VMQj8aQ_Z@>ID0O_ck11`52
+!s100 ]JNDR@h8JamQ;VZMGAh9^0
+R9
+32
+Z19 !s110 1729420535
+!i10b 1
+Z20 !s108 1729420535.000000
+Z21 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/testbench/rv_alu_tb.vhd|
+Z22 !s107 /home/idriss/Documents/Project/coReV32/src/testbench/rv_alu_tb.vhd|
+!i113 1
+R14
+R15
+Arv_alu_tb_arch
+R2
+R3
+R4
+DEx4 work 9 rv_alu_tb 0 22 MQj8aQ_Z@>ID0O_ck11`52
+!i122 28
+l27
+L16 33
+V;P52b6jaAma0;HEm:zS<n2
+!s100 C4ObZ:JIOJRmoi4Q>=T;F0
+R9
+32
+R19
+!i10b 1
+R20
+R21
+R22
+!i113 1
+R14
+R15
+Erv_core
+Z23 w1727607519
+R2
+R3
+R4
+!i122 21
+R5
+Z24 8/home/idriss/Documents/Project/coReV32/src/cpu/rv_core.vhd
+Z25 F/home/idriss/Documents/Project/coReV32/src/cpu/rv_core.vhd
+l0
+R8
+V=f1MUl9QTId1g`2P`9i0X1
+!s100 8TJ@WlG<gQ=`0dBoeoNHF1
+R9
+32
+Z26 !s110 1729420534
+!i10b 1
+Z27 !s108 1729420534.000000
+Z28 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/cpu/rv_core.vhd|
+Z29 !s107 /home/idriss/Documents/Project/coReV32/src/cpu/rv_core.vhd|
+!i113 1
+R14
+R15
+Arv_core_arch
+R2
+R3
+R4
+DEx4 work 7 rv_core 0 22 =f1MUl9QTId1g`2P`9i0X1
+!i122 21
+l20
+L17 7
+VnOYLm[1W?6hFE@bg`Ccma3
+!s100 nNVCf@akb0H<V=D]O0BoE1
+R9
+32
+R26
+!i10b 1
+R27
+R28
+R29
+!i113 1
+R14
+R15
+Erv_decode
+Z30 w1729444993
 R1
 R2
 R3
 R4
-!i122 5
+!i122 66
 R5
-Z21 8/home/idriss/Documents/Project/coReV32/src/cpu/rv_decoder.vhd
-Z22 F/home/idriss/Documents/Project/coReV32/src/cpu/rv_decoder.vhd
+Z31 8/home/idriss/Documents/Project/coReV32/src/cpu/rv_decode.vhd
+Z32 F/home/idriss/Documents/Project/coReV32/src/cpu/rv_decode.vhd
 l0
-R8
+Z33 L15 1
+VVFOBdzf13iV1<3g7jX[c53
+!s100 7:Yf?Db[F>gDUfdb5`bk[3
+R9
+32
+Z34 !s110 1729445152
+!i10b 1
+Z35 !s108 1729445152.000000
+Z36 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/cpu/rv_decode.vhd|
+Z37 !s107 /home/idriss/Documents/Project/coReV32/src/cpu/rv_decode.vhd|
+!i113 1
+R14
+R15
+Arv_decode_arch
+R1
+R2
+R3
+R4
+DEx4 work 9 rv_decode 0 22 VFOBdzf13iV1<3g7jX[c53
+!i122 66
+l149
+L75 188
+V?;?=M4UOoBZbKSj_8Le=l0
+!s100 50_P0R_PNbf93VQmz?<h40
+R9
+32
+R34
+!i10b 1
+R35
+R36
+R37
+!i113 1
+R14
+R15
+Erv_decoder
+Z38 w1729435460
+R1
+R2
+R3
+R4
+!i122 59
+R5
+Z39 8/home/idriss/Documents/Project/coReV32/src/cpu/rv_decoder.vhd
+Z40 F/home/idriss/Documents/Project/coReV32/src/cpu/rv_decoder.vhd
+l0
+R33
 V9WGI[LK9YcWT8T1UAJ6iO2
 !s100 THg[PM>oZ`mQBH2Y@J[;[1
 R9
 32
-Z23 !s110 1729379965
+Z41 !s110 1729442269
 !i10b 1
-Z24 !s108 1729379965.000000
-Z25 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/cpu/rv_decoder.vhd|
-Z26 !s107 /home/idriss/Documents/Project/coReV32/src/cpu/rv_decoder.vhd|
+Z42 !s108 1729442269.000000
+Z43 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/cpu/rv_decoder.vhd|
+Z44 !s107 /home/idriss/Documents/Project/coReV32/src/cpu/rv_decoder.vhd|
 !i113 1
 R14
 R15
@@ -84,25 +215,227 @@ R2
 R3
 R4
 DEx4 work 10 rv_decoder 0 22 9WGI[LK9YcWT8T1UAJ6iO2
-!i122 5
+!i122 59
 l66
-L51 205
-VJ]z[C7?Bdz31kOk1M:ffX3
-!s100 PAlaij>I<2jiAj7ULS=LG3
+L51 206
+VNI4HegzOUNk]09J?_15481
+!s100 ;Kn@mT1SGAWnSOQ[eE@:;0
 R9
 32
-R23
+R41
 !i10b 1
-R24
-R25
-R26
+R42
+R43
+R44
+!i113 1
+R14
+R15
+Erv_decoder_tb
+Z45 w1729434460
+R1
+R2
+R3
+R4
+!i122 43
+R5
+Z46 8/home/idriss/Documents/Project/coReV32/src/testbench/rv_decoder_tb.vhd
+Z47 F/home/idriss/Documents/Project/coReV32/src/testbench/rv_decoder_tb.vhd
+l0
+R8
+V<mAXD`SGBEO:UJBl4jj6N2
+!s100 19[KCQE8di=H_I2Rdehe43
+R9
+32
+Z48 !s110 1729435199
+!i10b 1
+Z49 !s108 1729435199.000000
+Z50 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/testbench/rv_decoder_tb.vhd|
+Z51 !s107 /home/idriss/Documents/Project/coReV32/src/testbench/rv_decoder_tb.vhd|
+!i113 1
+R14
+R15
+Arv_decoder_tb_arch
+R1
+R2
+R3
+R4
+DEx4 work 13 rv_decoder_tb 0 22 <mAXD`SGBEO:UJBl4jj6N2
+!i122 43
+l76
+L16 311
+V]`4mLahYWaeQ;RcJzVgSU2
+!s100 XUYM7eGU8;nQ4MaHJIdmV0
+R9
+32
+R48
+!i10b 1
+R49
+R50
+R51
+!i113 1
+R14
+R15
+Erv_execute
+Z52 w1729177004
+R1
+R2
+R3
+R4
+!i122 24
+R5
+Z53 8/home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd
+Z54 F/home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd
+l0
+L14 1
+VZmVN7^]CGK>Goz0T>L=Mb0
+!s100 0[m>?1aBkWgj`:5S[T8>12
+R9
+32
+R19
+!i10b 1
+R20
+Z55 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd|
+Z56 !s107 /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd|
+!i113 1
+R14
+R15
+Arv_execute_arch
+R1
+R2
+R3
+R4
+DEx4 work 10 rv_execute 0 22 ZmVN7^]CGK>Goz0T>L=Mb0
+!i122 24
+l61
+L50 103
+VBl?f97jSGh;L>Xb[HGR<l1
+!s100 `G2@^an4]FlBl;2dTNdJ=3
+R9
+32
+R19
+!i10b 1
+R20
+R55
+R56
+!i113 1
+R14
+R15
+Erv_extend_tb
+Z57 w1727536018
+R2
+R3
+R4
+!i122 18
+R5
+Z58 8/home/idriss/Documents/Project/coReV32/src/testbench/rv_extend_tb.vhd
+Z59 F/home/idriss/Documents/Project/coReV32/src/testbench/rv_extend_tb.vhd
+l0
+R8
+VhoLJ[fL5Ko[k]Vc>Zi_DW2
+!s100 cKAFDzOJhfLA7;R3Q=X>51
+R9
+32
+Z60 !s110 1729420517
+!i10b 1
+Z61 !s108 1729420517.000000
+Z62 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/testbench/rv_extend_tb.vhd|
+Z63 !s107 /home/idriss/Documents/Project/coReV32/src/testbench/rv_extend_tb.vhd|
+!i113 1
+R14
+R15
+Arv_extend_tb_arch
+R2
+R3
+R4
+DEx4 work 12 rv_extend_tb 0 22 hoLJ[fL5Ko[k]Vc>Zi_DW2
+!i122 18
+l30
+L16 23
+V=Cg:DVWgoFXag;Ez2]c@K2
+!s100 ?7`[6B93kzR4M[oLA1Fl;2
+R9
+32
+R60
+!i10b 1
+R61
+R62
+R63
+!i113 1
+R14
+R15
+Erv_fetch
+w1728945712
+R1
+R2
+R3
+R4
+!i122 25
+R5
+8/home/idriss/Documents/Project/coReV32/src/cpu/rv_fetch.vhd
+F/home/idriss/Documents/Project/coReV32/src/cpu/rv_fetch.vhd
+l0
+L10 1
+VQ=hmdMIkghP6NXncEIL[81
+!s100 od55fTa?D?@F@=P>U:J_K3
+R9
+32
+R19
+!i10b 1
+R20
+!s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/cpu/rv_fetch.vhd|
+!s107 /home/idriss/Documents/Project/coReV32/src/cpu/rv_fetch.vhd|
+!i113 1
+R14
+R15
+Erv_fetch_tb
+Z64 w1728434289
+R1
+R2
+R3
+R4
+!i122 31
+R5
+Z65 8/home/idriss/Documents/Project/coReV32/src/testbench/rv_fetch_tb.vhd
+Z66 F/home/idriss/Documents/Project/coReV32/src/testbench/rv_fetch_tb.vhd
+l0
+Z67 L12 1
+V3HjL>j1G>VdXmLJ=[j9c^1
+!s100 MZO[GQh?Kc;0Ji7HCb=Y91
+R9
+32
+R19
+!i10b 1
+R20
+Z68 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/testbench/rv_fetch_tb.vhd|
+Z69 !s107 /home/idriss/Documents/Project/coReV32/src/testbench/rv_fetch_tb.vhd|
+!i113 1
+R14
+R15
+Arv_fetch_tb_arch
+R1
+R2
+R3
+R4
+DEx4 work 11 rv_fetch_tb 0 22 3HjL>j1G>VdXmLJ=[j9c^1
+!i122 31
+l63
+L16 109
+VdlfODBUodYEz^eHK``K:c2
+!s100 [YN8CbjZYF?gQf>dC04Oc3
+R9
+32
+R19
+!i10b 1
+R20
+R68
+R69
 !i113 1
 R14
 R15
 Prv_package
 R3
 R4
-!i122 6
+!i122 26
 w1728983810
 R5
 8/home/idriss/Documents/Project/coReV32/src/cpu/rv_package.vhd
@@ -113,34 +446,77 @@ Vmi_o[Sd=]0_=Qz4l[hekX0
 !s100 k1Qnc:bY_jakM;Z==Qg@n1
 R9
 32
-!s110 1729379972
+R19
 !i10b 1
-!s108 1729379971.000000
+R20
 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/cpu/rv_package.vhd|
 !s107 /home/idriss/Documents/Project/coReV32/src/cpu/rv_package.vhd|
 !i113 1
 R14
 R15
-Erv_reg_file
-Z27 w1728770106
+Erv_prog_mem_tb
+Z70 w1727789447
 R2
 R3
 R4
-!i122 4
+!i122 32
 R5
-Z28 8/home/idriss/Documents/Project/coReV32/src/cpu/rv_reg_file.vhd
-Z29 F/home/idriss/Documents/Project/coReV32/src/cpu/rv_reg_file.vhd
+Z71 8/home/idriss/Documents/Project/coReV32/src/testbench/rv_prog_mem_tb.vhd
+Z72 F/home/idriss/Documents/Project/coReV32/src/testbench/rv_prog_mem_tb.vhd
 l0
-L12 1
+L5 1
+Vz_cYIR<J8cm;z6Sfo=Ka`2
+!s100 ifL5R6QP4eZEP:eXVf[kW0
+R9
+32
+R19
+!i10b 1
+R20
+Z73 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/testbench/rv_prog_mem_tb.vhd|
+Z74 !s107 /home/idriss/Documents/Project/coReV32/src/testbench/rv_prog_mem_tb.vhd|
+!i113 1
+R14
+R15
+Arv_prog_mem_tb_arch
+R2
+R3
+R4
+DEx4 work 14 rv_prog_mem_tb 0 22 z_cYIR<J8cm;z6Sfo=Ka`2
+!i122 32
+l26
+L8 59
+Vj8QPI>_=SY?G:llQWcd;92
+!s100 Qf5K@TZoQeoMFS:Klz3:]2
+R9
+32
+R19
+!i10b 1
+R20
+R73
+R74
+!i113 1
+R14
+R15
+Erv_reg_file
+Z75 w1729441970
+R2
+R3
+R4
+!i122 58
+R5
+Z76 8/home/idriss/Documents/Project/coReV32/src/cpu/rv_reg_file.vhd
+Z77 F/home/idriss/Documents/Project/coReV32/src/cpu/rv_reg_file.vhd
+l0
+R67
 V_mmg=NE<2iX;`4z3Mc<1S1
 !s100 WBS:^LBF6NcbSALSM9Tb00
 R9
 32
-Z30 !s110 1729379958
+Z78 !s110 1729442263
 !i10b 1
-Z31 !s108 1729379958.000000
-Z32 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/cpu/rv_reg_file.vhd|
-Z33 !s107 /home/idriss/Documents/Project/coReV32/src/cpu/rv_reg_file.vhd|
+Z79 !s108 1729442263.000000
+Z80 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/cpu/rv_reg_file.vhd|
+Z81 !s107 /home/idriss/Documents/Project/coReV32/src/cpu/rv_reg_file.vhd|
 !i113 1
 R14
 R15
@@ -149,18 +525,63 @@ R2
 R3
 R4
 DEx4 work 11 rv_reg_file 0 22 _mmg=NE<2iX;`4z3Mc<1S1
-!i122 4
+!i122 58
 l31
 L26 17
 VKl]W@lDZz>j`QzbHo5VG^0
 !s100 :c8Qe=_TC[DKPBBN6c<4h2
 R9
 32
-R30
+R78
 !i10b 1
-R31
-R32
-R33
+R79
+R80
+R81
+!i113 1
+R14
+R15
+Etb_rv_decode
+Z82 w1729445337
+Z83 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z84 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+R3
+R4
+!i122 68
+R5
+Z85 8/home/idriss/Documents/Project/coReV32/src/testbench/rv_decode_tb.vhd
+Z86 F/home/idriss/Documents/Project/coReV32/src/testbench/rv_decode_tb.vhd
+l0
+L5 1
+VAJHCU3Mij?A]jnA2?307b1
+!s100 i4WkD]F>L5cjU0?;OQLQG3
+R9
+32
+Z87 !s110 1729445345
+!i10b 1
+Z88 !s108 1729445345.000000
+Z89 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/idriss/Documents/Project/coReV32/src/testbench/rv_decode_tb.vhd|
+Z90 !s107 /home/idriss/Documents/Project/coReV32/src/testbench/rv_decode_tb.vhd|
+!i113 1
+R14
+R15
+Atb
+R83
+R84
+R3
+R4
+Z91 DEx4 work 12 tb_rv_decode 0 22 AJHCU3Mij?A]jnA2?307b1
+!i122 68
+l118
+Z92 L8 196
+VT;OU07N[AI;D;4GdgJS`13
+!s100 TC`LAjOM50oODN3NU^fd@0
+R9
+32
+R87
+!i10b 1
+R88
+R89
+R90
 !i113 1
 R14
 R15

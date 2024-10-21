@@ -73,11 +73,11 @@ port (
 end entity;
 
 architecture rv_decode_arch of rv_decode is 
-signal decode_valid_o : std_logic;
-signal instr_data : std_logic_vector(31 downto 0);
-signal reg_file_raddr1    : std_logic_vector(4 downto 0);
-signal reg_file_raddr2    : std_logic_vector(4 downto 0);
-signal reg_file_waddr     : std_logic_vector(4 downto 0);
+signal decoder_valid_o : std_logic :='0';
+signal instr_data         : std_logic_vector(31 downto 0);
+signal reg_file_raddr1    : std_logic_vector(4 downto 0) :=(others => '0');
+signal reg_file_raddr2    : std_logic_vector(4 downto 0) :=(others => '0');
+signal reg_file_waddr     : std_logic_vector(4 downto 0) :=(others => '0');
 signal reg_file_rdata1    : std_logic_vector(31 downto 0);
 signal reg_file_rdata2    : std_logic_vector(31 downto 0);
 signal reg_f_rdata1_bar: std_logic_vector(31 downto 0);--not(reg_file_rdata1)
@@ -148,7 +148,7 @@ component rv_decoder
 end component;
 begin
 instruction_decoder : rv_decoder port map (
-    valid_o            => decode_valid_o, 
+    valid_o            => decoder_valid_o, 
     instr_data         => instr_data,
     illegal_instr      => illegal_instr,
     alu_operand_a_src  => alu_operand_a_src,
@@ -201,12 +201,22 @@ end process;
 reg_f_rdata1_bar <= not reg_file_rdata2;--this value is needed for some instructions 
 --------------------------------------------------------------
 --                DECODE-EXECUTE STAGE PIPELINE             --
--------------------------------------------------------------- 
+--------------------------------------------------------------
+process(clk)
+begin
+    if rising_edge(clk) then
+        if rst_n = '0' then
+            instr_data <= (others => '0');
+        elsif (fetch_valid_o = '1') then --load the instruction for porocessing
+            instr_data <= instr_data_fd;
+        end if;
+    end if;
+    
+end process;
 process(clk)
 begin
     if rising_edge(clk) then
        if (rst_n = '0') then    
-          instr_data <= (others => '0');
           instr_addr_dx        <= (others => '0');
           pc_plus_4_dx         <= (others => '0');
           reg_f_rdata1_bar_dx  <= (others => '0');
@@ -221,32 +231,27 @@ begin
           csr_addr_dx          <= (others => '0');
           pc_next_src_dx       <= PC_RST;
           decode_valid_o_dx    <= '0';
-       else
-           if (fetch_valid_o = '1') then --load the instruction for porocessing
-                 instr_data <= instr_data_fd;
-                 decode_valid_o_dx <= '0';--decode stage not finished yet 
-           elsif (stall = '1') then --freeze decode stage 
-                 decode_ready      <= '0';--decode stage is not ready for receiving new instruction
-                 decode_valid_o_dx <= '0';--decode stage has no valid output
-           elsif (execute_ready = '1' and illegal_instr = '0' and decode_valid_o = '1') then--execute stage is ready to receive decoded instruction
-                 instr_addr_dx        <= instr_addr_fd;
-                 pc_plus_4_dx         <= pc_plus_4_fd;
-                 reg_f_rdata1_bar_dx  <= reg_f_rdata1_bar;
-                 branch_t_dx          <= branch_t;
-                 jump_t_dx            <= jump_t;
-                 imm_extended_dx      <= imm_extended;
-                 reg_f_we_dx          <= reg_file_we;
-                 alu_operand_a_src_dx <= alu_operand_a_src;
-                 alu_operand_b_src_dx <= alu_operand_b_src;
-                 alu_op_dx            <= alu_op;
-                 csr_wdata_src_dx     <= csr_wdata_src;
-                 csr_addr_dx          <= csr_addr;
-                 pc_next_src_dx       <= pc_next_src;
-                 decode_valid_o_dx    <= '1';
-           else 
-                 decode_valid_o_dx <= '0';
-                 decode_ready <= '1';
-           end if;
+       elsif (stall = '1') then --freeze decode stage 
+          decode_ready      <= '0';--decode stage is not ready for receiving new instruction
+          decode_valid_o_dx <= '0';--decode stage has no valid output
+       elsif (execute_ready = '1' and illegal_instr = '0' and decoder_valid_o = '1') then--execute stage is ready to receive decoded instruction
+          instr_addr_dx        <= instr_addr_fd;
+          pc_plus_4_dx         <= pc_plus_4_fd;
+          reg_f_rdata1_bar_dx  <= reg_f_rdata1_bar;
+          branch_t_dx          <= branch_t;
+          jump_t_dx            <= jump_t;
+          imm_extended_dx      <= imm_extended;
+          reg_f_we_dx          <= reg_file_we;
+          alu_operand_a_src_dx <= alu_operand_a_src;
+          alu_operand_b_src_dx <= alu_operand_b_src;
+          alu_op_dx            <= alu_op;
+          csr_wdata_src_dx     <= csr_wdata_src;
+          csr_addr_dx          <= csr_addr;
+          pc_next_src_dx       <= pc_next_src;
+          decode_valid_o_dx    <= '1';
+       else 
+          decode_valid_o_dx <= '0';
+          decode_ready <= '1';
        end if;
     end if;
 end process;
