@@ -13,7 +13,7 @@ use work.rv_package.all;
 entity rv_csr_unit is
 port (
     clk         : in std_logic;
-    --mtimer_clk  : in std_logic;
+    --  mtimer_clk  : in std_logic;
     rst_n       : in std_logic;--active low reset
 
     csr_we      : in std_logic; --csr write enable
@@ -32,8 +32,7 @@ port (
     mepc_i    : in std_logic_vector(31 downto 0);
     mtvec_i   : in std_logic_vector(31 downto 0);
     mcause_i  : in std_logic_vector(31 downto 0);    
-    on_exc_we : in std_logic;--on exception/interrupt write enable
-
+    on_exc_we : in std_logic--on exception/interrupt write enable
 );
 end entity;
 

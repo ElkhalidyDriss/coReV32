@@ -43,13 +43,24 @@ port(
     --CSR unit
     csr_wdata_src_d_ex  : in std_logic_vector(1 downto 0);
     csr_addr_d_ex       : in std_logic_vector(11 downto 0);--address of the  CS register 
+    csr_we_d_ex         : in std_logic;
     --Jump/Branch unit 
     jump_t_d_ex          : in std_logic;--jump type
                                    -- '0' JAL 
                                    -- '1' JALR
     branch_t_d_ex        : in std_logic_vector(2 downto 0);
     branch_target_o      : out std_logic_vector(31 downto 0);
-    jump_target_o        : out std_logic_vector(31 downto 0)
+    jump_target_o        : out std_logic_vector(31 downto 0);
+    --Interrupts Controller interface
+    on_exc_we : in  std_logic;--on exception/interrupt write enable 
+    mstatus_i : in  std_logic_vector(31 downto 0);
+    mepc_i    : in  std_logic_vector(31 downto 0);
+    mtvec_i   : in  std_logic_vector(31 downto 0);
+    mcause_i  : in  std_logic_vector(31 downto 0);    
+    mstatus_o : out std_logic_vector(31 downto 0);
+    mepc_o    : out std_logic_vector(31 downto 0);
+    mtvec_o   : out std_logic_vector(31 downto 0);
+    mcause_o  : out std_logic_vector(31 downto 0);
 );
 end entity;
 
@@ -63,13 +74,38 @@ signal alu_res : std_logic_vector(31 downto 0);
 signal aluEQ   : std_logic;
 --Branch
 signal branch_target_int : std_logic_vector(31 downto 0);--internal signal
---Component
+--Components 
 component rv_alu 
 port (     valA , valB : in  std_logic_vector(31 downto 0);--ALU input operands
            alu_op      : in  std_logic_vector(3 downto 0); --alu operation
            alu_res     : out std_logic_vector(31 downto 0); -- ALU result
            aluEQ       : out std_logic); -- equal flag , active high when srcA = srcB
 end component;
+component rv_csr_unit 
+    port (
+        clk         : in std_logic;
+        --  mtimer_clk  : in std_logic;
+        rst_n       : in std_logic;--active low reset
+    
+        csr_we      : in std_logic; --csr write enable
+        csr_addr    : in std_logic_vector(11 downto 0);--control & status register address
+        csr_wdata_i : in std_logic_vector(31 downto 0);--csr write data in 
+        csr_rdata_o : out std_logic_vector(31 downto 0)--csr read data output
+        --Interrupts controller 
+        -- mti_o     : out std_logic;--machine time interrupt
+        --immediately prividing outputs of  interrupt registers
+        mstatus_o : out std_logic_vector(31 downto 0);
+        mepc_o    : out std_logic_vector(31 downto 0);
+        mtvec_o   : out std_logic_vector(31 downto 0);
+        mcause_o  : out std_logic_vector(31 downto 0);
+        
+        mstatus_i : in std_logic_vector(31 downto 0);
+        mepc_i    : in std_logic_vector(31 downto 0);
+        mtvec_i   : in std_logic_vector(31 downto 0);
+        mcause_i  : in std_logic_vector(31 downto 0);    
+        on_exc_we : in std_logic--on exception/interrupt write enable
+    );
+end component; 
 begin
 -----------------------------------------------
 --                  ALU                      --
@@ -108,8 +144,26 @@ begin
     end case;
 end process;
 -----------------------------------------------
---               CSR Unit                 --
+--               CSR Unit                    --
 -----------------------------------------------
+csr_unit : rv_csr_unit 
+port map (
+    clk         => clk ,    
+    rst_n       => rst_n,    
+    csr_we      => csr_we_d_ex,  
+    csr_addr    => csr_addr_d_ex  
+    csr_wdata_i => csr_wdata,
+    csr_rdata_o => csr_rdata_o,
+    mstatus_o   => mstatus_o,
+    mepc_o      => mepc_o, 
+    mtvec_o     => mtvec_o,  
+    mcause_o    => mcause_o, 
+    mstatus_i   => mstatus_i,
+    mepc_i      => mepc_i,
+    mtvec_i     => mtvec_i,
+    mcause_i    => mcause_i,
+    on_exc_we   => on_exc_we
+);
 CSR_MUX : process(csr_wdata_src_d_ex)
 begin
     case(csr_wdata_src_d_ex) is 
@@ -174,4 +228,8 @@ begin
         when others => null;  
     end case;
 end process;
+---------------------------------------------------------------
+--              EXECUTE-WRITE BACK PIPELINE                  --
+---------------------------------------------------------------
+
 end architecture;
