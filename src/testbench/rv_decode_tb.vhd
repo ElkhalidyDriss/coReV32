@@ -7,24 +7,24 @@ end entity;
 
 architecture tb of tb_rv_decode is
 constant CLK_PERIOD : time := 10 ns;
-signal clk_tb                     : std_logic := '0';
-signal rst_n_tb                   : std_logic := '1'; -- active low reset
+signal clk_tb                     : std_logic;
+signal rst_n_tb                   : std_logic; -- active low reset
 -- Fetch Unit
 signal fetch_valid_o_tb           : std_logic := '1';
-signal instr_data_fd_tb           : std_logic_vector(31 downto 0);
-signal instr_addr_fd_tb           : std_logic_vector(31 downto 0);
-signal pc_plus_4_fd_tb            : std_logic_vector(31 downto 0);
+signal instr_data_fd_tb           : std_logic_vector(31 downto 0) :=(others => '0');
+signal instr_addr_fd_tb           : std_logic_vector(31 downto 0) :=(others => '0');
+signal pc_plus_4_fd_tb            : std_logic_vector(31 downto 0) :=(others => '0');
 -- Execute Unit
 signal instr_addr_dx_tb           : std_logic_vector(31 downto 0);
 signal pc_plus_4_dx_tb            : std_logic_vector(31 downto 0);
 signal pc_next_src_dx_tb          : std_logic_vector(2 downto 0);
 -- Write Back Unit
 signal reg_f_we_wb_tb             : std_logic := '1';
-signal pc_plus_4_wb_tb            : std_logic_vector(31 downto 0);
-signal imm_u_wb_tb                : std_logic_vector(31 downto 0);
-signal alu_res_wb_tb              : std_logic_vector(31 downto 0);
-signal data_mem_rdata_wb_tb       : std_logic_vector(31 downto 0);
-signal csr_rdata_wb_tb            : std_logic_vector(31 downto 0);
+signal pc_plus_4_wb_tb            : std_logic_vector(31 downto 0) :=(others => '0');
+signal imm_u_wb_tb                : std_logic_vector(31 downto 0) :=(others => '0');
+signal alu_res_wb_tb              : std_logic_vector(31 downto 0) :=(others => '0');
+signal data_mem_rdata_wb_tb       : std_logic_vector(31 downto 0) :=(others => '0');
+signal csr_rdata_wb_tb            : std_logic_vector(31 downto 0) :=(others => '0');
 -- Register File
 signal reg_f_rdata1_dx_tb         : std_logic_vector(31 downto 0);
 signal reg_f_rdata1_bar_dx_tb     : std_logic_vector(31 downto 0);
@@ -48,10 +48,10 @@ signal csr_wdata_src_dx_tb        : std_logic_vector(1 downto 0);
 -- Immediate Value
 signal imm_extended_dx_tb         : std_logic_vector(31 downto 0);
 -- Pipeline and Hazard Unit
-signal stall_tb                   : std_logic;
+signal stall_tb                   : std_logic :='0';
 signal decode_ready_tb            : std_logic;
 signal decode_valid_o_dx_tb       : std_logic;
-signal execute_ready_tb           : std_logic ;
+signal execute_ready_tb           : std_logic:='0';
 signal hazard_branch_o_tb         : std_logic;
 signal hazard_illegal_instr_o_tb  : std_logic;
 signal hazard_rf_rs1_id_tb        : std_logic_vector(4 downto 0);
@@ -178,9 +178,9 @@ CLOCK: process
 STIMILUS: process
 begin
     rst_n_tb <= '0';
-    wait for 20 ns;
+    wait for 10 ns;
     rst_n_tb <= '1';
-    wait for 20 ns;
+    wait for 10 ns;
     --TEST 1 :  Loading instruction data and program counter from Fetch unit
     report "TEST 1 :  Loading instruction data and program counter from Fetch unit";
     stall_tb <= '0';
@@ -189,15 +189,35 @@ begin
     instr_data_fd_tb <= x"123452B7"; --lui x5, 0x12345
     instr_addr_fd_tb <= x"00000001"; --Example address
     pc_plus_4_fd_tb  <= x"00000004"; --Next address
-    wait for CLK_PERIOD;
+    wait until decode_valid_o_dx_tb = '1';
+    report "TEST 1 : decode has valid output now";
     assert instr_addr_dx_tb = x"00000001" 
            report "TEST 1 Failed : Incorrect current instruction address" 
            severity error;
     assert pc_plus_4_dx_tb  = x"00000004" 
            report "TEST 1 Failed : Incorrect next instruction Address"
            severity error;
-    fetch_valid_o_tb <= '0';--fetch has no valid output 
-    
+    fetch_valid_o_tb <= '0';--fetch has no valid output
+    wait for CLK_PERIOD;
+    --TEST 2 : Halting decode stage 
+    report "--TEST 2 : Halting decode stage ";
+    stall_tb <= '1';
+    wait for CLK_PERIOD;
+    stall_tb <= '0';
+    assert decode_ready_tb = '0'
+           report "TEST 2 Failed : When stalled decode stage shouldn't be ready for receiving new instruction"
+           severity error;
+    assert decode_valid_o_dx_tb = '0'
+           report "TEST 2 Failed : When stalled decode stage shouldn't present an output "
+           severity error;
+    --TEST 3 : Illegal instruction
+    report "TEST 3 : Illegal instruction";
+    fetch_valid_o_tb <= '1';
+    instr_data_fd_tb <=(31 downto 7 => '0')&"1001101"; 
+    wait for CLK_PERIOD;
+    assert  hazard_illegal_instr_o_tb = '1' 
+    report "TEST 3 Failed : The illegal instruction is not detected"
+    severity error; 
     wait;
 end process;
 end architecture;

@@ -73,14 +73,14 @@ port (
 end entity;
 
 architecture rv_decode_arch of rv_decode is 
-signal decoder_valid_o    : std_logic :='0';
+signal decoder_valid_o : std_logic :='0';
 signal instr_data         : std_logic_vector(31 downto 0);
 signal reg_file_raddr1    : std_logic_vector(4 downto 0) :=(others => '0');
 signal reg_file_raddr2    : std_logic_vector(4 downto 0) :=(others => '0');
 signal reg_file_waddr     : std_logic_vector(4 downto 0) :=(others => '0');
 signal reg_file_rdata1    : std_logic_vector(31 downto 0);
 signal reg_file_rdata2    : std_logic_vector(31 downto 0);
-signal reg_f_rdata1_bar   : std_logic_vector(31 downto 0);--not(reg_file_rdata1)
+signal reg_f_rdata1_bar: std_logic_vector(31 downto 0);--not(reg_file_rdata1)
 signal reg_file_wdata     : std_logic_vector(31 downto 0);
 signal reg_file_wdata_src : std_logic_vector(2 downto 0);
 signal reg_file_we        : std_logic;
@@ -200,7 +200,7 @@ begin
 end process;
 reg_f_rdata1_bar <= not reg_file_rdata2;--this value is needed for some instructions 
 --------------------------------------------------------------
---              DECODE-EXECUTE  PIPELINE REGISTER           --
+--                DECODE-EXECUTE STAGE PIPELINE             --
 --------------------------------------------------------------
 process(clk)
 begin
@@ -257,7 +257,7 @@ begin
           reg_f_waddr_dx       <= reg_file_waddr;
           reg_f_we_dx          <= reg_file_we;
           reg_f_rdata1_dx      <= reg_file_rdata1;
-          reg_f_rdata2_dx      <= reg_file_rdata2;
+          reg_f_rdata2_dx      <= reg_file_rdata2
           reg_f_rdata1_bar_dx  <= reg_f_rdata1_bar;
           --Branch/Jump
           branch_t_dx          <= branch_t;

@@ -49,8 +49,30 @@ constant W_SRC_CSR        : std_logic_vector(2 downto 0) :="001";--write data so
 constant W_SRC_PC_PLUS_4     : std_logic_vector(2 downto 0) :="010";--write data  is  pc_curr+4
 constant W_SRC_DATA_MEM   : std_logic_vector(2 downto 0) :="011";--write data source comes from data memory output 
 constant W_SRC_IMM        : std_logic_vector(2 downto 0) :="100";--write data source comes from extended imm_u value
---Control&Status Registers
-constant MEPC_ADDR : std_logic_vector(11 downto 0) :=x"341";
+--------------------------------------------------
+--         Control and Status Registers         --
+--------------------------------------------------
+-- Machine Information Registers
+constant MVENDORID_ADDR      : std_logic_vector(11 downto 0) := x"F11";
+constant MARCHID_ADDR        : std_logic_vector(11 downto 0) := x"F12";
+constant MIMPID_ADDR         : std_logic_vector(11 downto 0) := x"F13";
+constant MHARTID_ADDR        : std_logic_vector(11 downto 0) := x"F14";
+-- Machine Trap Setup
+constant MSTATUS_ADDR        : std_logic_vector(11 downto 0) := x"300";
+constant MISA_ADDR           : std_logic_vector(11 downto 0) := x"301";
+constant MEDELEG_ADDR        : std_logic_vector(11 downto 0) := x"302";
+constant MIDELEG_ADDR        : std_logic_vector(11 downto 0) := x"303";
+constant MIE_ADDR            : std_logic_vector(11 downto 0) := x"304";
+constant MTVEC_ADDR          : std_logic_vector(11 downto 0) := x"305";
+constant MCOUNTEREN_ADDR     : std_logic_vector(11 downto 0) := x"306";
+-- Machine Trap Handling
+constant MSCRATCH_ADDR       : std_logic_vector(11 downto 0) := x"340";
+constant MEPC_ADDR           : std_logic_vector(11 downto 0) := x"341";
+constant MCAUSE_ADDR         : std_logic_vector(11 downto 0) := x"342";
+constant MTVAL_ADDR          : std_logic_vector(11 downto 0) := x"343";
+constant MIP_ADDR            : std_logic_vector(11 downto 0) := x"344";
+
+
 --------------------------------------------------------
 --                      OPCODE                        --
 --------------------------------------------------------

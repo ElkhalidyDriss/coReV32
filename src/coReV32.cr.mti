@@ -8,17 +8,7 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Compiling entity rv_fetch_tb
 -- Compiling architecture rv_fetch_tb_arch of rv_fetch_tb
 
-} {} {}} /home/idriss/Documents/Project/coReV32/src/cpu/rv_csr_unit.vhd {0 {vcom -work work -2002 -explicit -stats=none /home/idriss/Documents/Project/coReV32/src/cpu/rv_csr_unit.vhd
-Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Loading package rv_package
--- Compiling entity rv_csr_unit
-** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_csr_unit.vhd(21): near ")": (vcom-1576) expecting IDENTIFIER.
-
-} {9.0 10.0} {}} /home/idriss/Documents/Project/coReV32/src/cpu/rv_core.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/idriss/Documents/Project/coReV32/src/cpu/rv_core.vhd
+} {} {}} /home/idriss/Documents/Project/coReV32/src/cpu/rv_core.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/idriss/Documents/Project/coReV32/src/cpu/rv_core.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -43,7 +33,7 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 ** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_fetch.vhd(86): Type error resolving infix expression "=" as type std.STANDARD.BOOLEAN.
 ** Note: /home/idriss/Documents/Project/coReV32/src/cpu/rv_fetch.vhd(97): VHDL Compiler exiting
 
-} {10.0 15.0} {}} /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd
+} {10.0 15.0} {}} /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd {0 {vcom -work work -2002 -explicit -stats=none /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -52,8 +42,56 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Loading package rv_package
 -- Compiling entity rv_execute
 -- Compiling architecture rv_execute_arch of rv_execute
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(80): near ")": syntax error
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(81): Statement cannot be labeled.
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(81): (vcom-1136) Unknown identifier "alu_operand_a_src".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(81): Expression is not a signal.
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(83): (vcom-1136) Unknown identifier "alu_operand_a_src".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(84): Constant "ALU_OPERAND_RS1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(85): (vcom-1136) Unknown identifier "reg_file_rdata1_i".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(86): Constant "ALU_OPERAND_RS1_BAR" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(87): (vcom-1136) Unknown identifier "reg_file_rdata1_bar_i".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(88): Constant "ALU_OPERAND_PC" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(89): (vcom-1136) Unknown identifier "instr_addr".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(90): Constant "ALU_OPERAND_SRC_CSR" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(95): (vcom-1136) Unknown identifier "alu_operand_b_src".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(95): Expression is not a signal.
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(97): (vcom-1136) Unknown identifier "alu_operand_b_src".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(98): Constant "ALU_OPERAND_RS2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(99): (vcom-1136) Unknown identifier "reg_file_rdata2_i".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(100): Constant "ALU_OPERAND_SRC_IMM" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(101): (vcom-1136) Unknown identifier "extended_imm".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(102): Constant "ALU_OPERAND_SRC_CSR" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(107): (vcom-1136) Unknown identifier "csr_wdata_src".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(107): Expression is not a signal.
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(109): (vcom-1136) Unknown identifier "csr_wdata_src".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(110): Constant "CSR_W_SRC_RS1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(111): (vcom-1136) Unknown identifier "reg_file_rdata1_i".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(112): Constant "CSR_W_SRC_ALU_RES" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(114): Constant "CSR_W_SRC_IMM" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(115): (vcom-1136) Unknown identifier "extended_imm".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(123): (vcom-1136) Unknown identifier "jump_t".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(123): Type error resolving infix expression "=" as type std.STANDARD.BOOLEAN.
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(125): (vcom-1136) Unknown identifier "instr_addr".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(125): (vcom-1136) Unknown identifier "extended_imm".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(126): (vcom-1136) Unknown identifier "branch_t".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(126): Expression is not a signal.
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(128): (vcom-1136) Unknown identifier "branch_t".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(129): Constant "BEQ" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(133): (vcom-1136) Unknown identifier "pc_plus_4".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(135): Constant "BNE" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(139): (vcom-1136) Unknown identifier "pc_plus_4".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(141): Constant "BLT" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(146): (vcom-1136) Unknown identifier "pc_plus_4".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(148): Constant "BGE" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(153): (vcom-1136) Unknown identifier "pc_plus_4".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(155): Constant "BLTU" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(160): (vcom-1136) Unknown identifier "pc_plus_4".
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(162): Constant "BGEU" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+** Error: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(166): (vcom-1136) Unknown identifier "pc_plus_4".
+** Note: /home/idriss/Documents/Project/coReV32/src/cpu/rv_execute.vhd(171): VHDL Compiler exiting
 
-} {} {}} /home/idriss/Documents/Project/coReV32/src/cpu/rv_reg_file.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/idriss/Documents/Project/coReV32/src/cpu/rv_reg_file.vhd
+} {10.0 57.0} {}} /home/idriss/Documents/Project/coReV32/src/cpu/rv_reg_file.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/idriss/Documents/Project/coReV32/src/cpu/rv_reg_file.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -99,16 +137,6 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Loading package NUMERIC_STD
 -- Compiling entity rv_prog_mem_tb
 -- Compiling architecture rv_prog_mem_tb_arch of rv_prog_mem_tb
-
-} {} {}} /home/idriss/Documents/Project/coReV32/src/cpu/rv_decode.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/idriss/Documents/Project/coReV32/src/cpu/rv_decode.vhd
-Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Loading package rv_package
--- Compiling entity rv_decode
--- Compiling architecture rv_decode_arch of rv_decode
 
 } {} {}} /home/idriss/Documents/Project/coReV32/src/cpu/rv_package.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/idriss/Documents/Project/coReV32/src/cpu/rv_package.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
